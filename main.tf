@@ -16,6 +16,41 @@ resource "azurerm_postgresql_server" "postgresql_server" {
   infrastructure_encryption_enabled = true
 }
 
+resource "azurerm_postgresql_configuration" "connection_throttling" {
+  name                = "connection_throttling"
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_postgresql_server.postgresql_server.name
+  value               = "on"
+}
+
+resource "azurerm_postgresql_configuration" "log_checkpoints" {
+  name                = "log_checkpoints"
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_postgresql_server.postgresql_server.name
+  value               = "on"
+}
+
+resource "azurerm_postgresql_configuration" "log_connections" {
+  name                = "log_connections"
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_postgresql_server.postgresql_server.name
+  value               = "on"
+}
+
+resource "azurerm_postgresql_configuration" "log_disconnections" {
+  name                = "log_disconnections"
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_postgresql_server.postgresql_server.name
+  value               = "on"
+}
+
+resource "azurerm_postgresql_configuration" "log_retention_days" {
+  name                = "log_retention_days"
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_postgresql_server.postgresql_server.name
+  value               = "30"
+}
+
 resource "azurerm_postgresql_firewall_rule" "firewall" {
   name                = var.name
   resource_group_name = var.resource_group_name
